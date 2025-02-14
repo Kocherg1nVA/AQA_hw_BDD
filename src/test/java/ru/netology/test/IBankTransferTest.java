@@ -18,7 +18,7 @@ public class IBankTransferTest {
 
     @BeforeEach
     public void setUp(){
-//        Configuration.browser = "firefox";
+        Configuration.browser = "firefox";
         Selenide.open("http://localhost:9999");
         var userInfo = getUserInfo();
         validLogin(userInfo);
