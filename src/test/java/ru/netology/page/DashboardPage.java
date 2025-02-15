@@ -10,10 +10,10 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class DashboardPage {
 
-    private final SelenideElement heading = $("h1.heading");
+    private static final SelenideElement heading = $("h1.heading");
     private static ElementsCollection cards = $$(".list__item");
-    private final SelenideElement firstCardAddButton = $("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0'] .button");
-    private final SelenideElement secondCardAddButton = $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d'] .button");
+    private static final SelenideElement firstCardAddButton = $("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0'] .button");
+    private static final SelenideElement secondCardAddButton = $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d'] .button");
     private static final String balanceStart = "баланс: ";
     private static final String balanceFinish = " р.";
 
@@ -33,12 +33,12 @@ public class DashboardPage {
         return Integer.parseInt(value);
     }
 
-    public MoneyTransferPage addToFirstCard() {
+    public static MoneyTransferPage addToFirstCard() {
         firstCardAddButton.click();
         return new MoneyTransferPage();
     }
 
-    public MoneyTransferPage addToSecondCard() {
+    public static MoneyTransferPage addToSecondCard() {
         secondCardAddButton.click();
         return new MoneyTransferPage();
     }

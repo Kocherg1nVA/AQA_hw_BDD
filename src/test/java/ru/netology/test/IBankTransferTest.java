@@ -5,32 +5,40 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.page.DashboardPage;
+import ru.netology.page.LoginPage;
 import ru.netology.page.MoneyTransferPage;
+import ru.netology.page.VerificationPage;
 
 import static ru.netology.data.DataHelper.*;
+import static ru.netology.page.DashboardPage.addToFirstCard;
+import static ru.netology.page.DashboardPage.addToSecondCard;
 import static ru.netology.page.LoginPage.validLogin;
 import static ru.netology.page.VerificationPage.validVerify;
 
 public class IBankTransferTest {
+
+    private static LoginPage loginPage;
+    private static VerificationPage verificationPage;
+    private static DashboardPage dashboardPage;
+    private static MoneyTransferPage moneyTransferPage;
 
     String amount = generateAmount(5000);
     String invalidAmount = generateInvalidAmount();
 
     @BeforeEach
     public void setUp() {
-        Selenide.open("http://localhost:9999");
+        loginPage = Selenide.open("http://localhost:9999", LoginPage.class);
         var userInfo = getUserInfo();
-        validLogin(userInfo);
-        validVerify(getVerificationCode(userInfo));
+        verificationPage = validLogin(userInfo);
+        dashboardPage = validVerify(getVerificationCode(userInfo));
     }
 
     @Test
     public void shouldTransferFromFirsToSecond() {
-        var dashboardPage = new DashboardPage();
-        var moneyTransferPage = new MoneyTransferPage();
         int initialFirstCardBalance = DashboardPage.getCardBalance(getFirstCard().getNumber());
         int initialSecondCardBalance = DashboardPage.getCardBalance(getSecondCard().getNumber());
-        dashboardPage.addToFirstCard();
+
+        moneyTransferPage = addToFirstCard();
         moneyTransferPage.moneyTransfer(amount);
 
         int expectedFirstCardBalance = initialFirstCardBalance + Integer.parseInt(amount);
@@ -42,11 +50,10 @@ public class IBankTransferTest {
 
     @Test
     public void shouldTransferFromSecondToFirst() {
-        var dashboardPage = new DashboardPage();
-        var moneyTransferPage = new MoneyTransferPage();
         int initialFirstCardBalance = DashboardPage.getCardBalance(getFirstCard().getNumber());
         int initialSecondCardBalance = DashboardPage.getCardBalance(getSecondCard().getNumber());
-        dashboardPage.addToSecondCard();
+
+        moneyTransferPage = addToSecondCard();
         moneyTransferPage.moneyTransfer(amount);
 
         int expectedSecondCardBalance = initialSecondCardBalance + Integer.parseInt(amount);
@@ -58,11 +65,10 @@ public class IBankTransferTest {
 
     @Test
     public void shouldNotTransferAmountMoreThanBalance() {
-        var dashboardPage = new DashboardPage();
-        var moneyTransferPage = new MoneyTransferPage();
         int initialFirstCardBalance = DashboardPage.getCardBalance(getFirstCard().getNumber());
         int initialSecondCardBalance = DashboardPage.getCardBalance(getSecondCard().getNumber());
-        dashboardPage.addToFirstCard();
+
+        moneyTransferPage = addToFirstCard();
         moneyTransferPage.moneyTransfer(invalidAmount);
         moneyTransferPage.amountMoreThanBalance();
 
