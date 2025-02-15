@@ -54,4 +54,17 @@ public class IBankTransferTest {
         Assertions.assertEquals(expectedSecondCardBalance, DashboardPage.getCardBalance(getSecondCard().getNumber()));
         Assertions.assertEquals(expectedFirstCardBalance, DashboardPage.getCardBalance(getFirstCard().getNumber()));
     }
+    @Test
+    public void shouldNotTransferAmountMoreThanBalance(){
+        var dashboardPage = new DashboardPage();
+        var moneyTransferPage = new MoneyTransferPage();
+        int initialFirstCardBalance = DashboardPage.getCardBalance(getFirstCard().getNumber());
+        int initialSecondCardBalance = DashboardPage.getCardBalance(getSecondCard().getNumber());
+        dashboardPage.addToFirstCard();
+        moneyTransferPage.moneyTransfer(invalidAmount);
+        moneyTransferPage.amountMoreThanBalance();
+
+        Assertions.assertEquals(initialFirstCardBalance, DashboardPage.getCardBalance(getFirstCard().getNumber()));
+        Assertions.assertEquals(initialSecondCardBalance, DashboardPage.getCardBalance(getSecondCard().getNumber()));
+    }
 }

@@ -40,11 +40,11 @@ public class DataHelper {
         return new CardInfo("5559 0000 0000 0002");
     }
 
-    public static String generateAmount(int balance){
-        int amount = new Random().nextInt(balance);
-        return Integer.toString(amount);
+    public static String generateAmount(int amount){
+        return Integer.toString(new Random().nextInt(amount));
     }
     public static String generateInvalidAmount(){
-        return Integer.toString(3_000);
+        int randomAmount = new Random().nextInt(50_000 - 20_000 + 1) + 20_000;
+        return Integer.toString(randomAmount);
     }
 }

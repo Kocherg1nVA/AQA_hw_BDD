@@ -2,7 +2,6 @@ package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.netology.data.DataHelper;
-import ru.netology.data.DataHelper.VerificationCode;
 
 import static com.codeborne.selenide.Selenide.$;
 
