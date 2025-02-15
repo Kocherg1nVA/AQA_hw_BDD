@@ -21,23 +21,24 @@ public class DashboardPage {
         heading.shouldBe(Condition.visible);
     }
 
-    public static int getCardBalance(String cardNumber){
-        val text = cards.find(Condition.text(cardNumber.substring(15,19))).getText();
+    public static int getCardBalance(String cardNumber) {
+        val text = cards.find(Condition.text(cardNumber.substring(15, 19))).getText();
         return extractBalance(text);
     }
-    private static int extractBalance(String text){
+
+    private static int extractBalance(String text) {
         val start = text.indexOf(balanceStart);
         val finish = text.indexOf(balanceFinish);
         val value = text.substring(start + balanceStart.length(), finish);
         return Integer.parseInt(value);
     }
 
-    public MoneyTransferPage addToFirstCard(){
+    public MoneyTransferPage addToFirstCard() {
         firstCardAddButton.click();
         return new MoneyTransferPage();
     }
 
-    public MoneyTransferPage addToSecondCard(){
+    public MoneyTransferPage addToSecondCard() {
         secondCardAddButton.click();
         return new MoneyTransferPage();
     }

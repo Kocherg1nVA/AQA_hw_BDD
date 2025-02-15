@@ -11,10 +11,11 @@ public class VerificationPage {
     private static final SelenideElement codeField = $("[data-test-id='code'] input");
     private static final SelenideElement verifyButton = $("[data-test-id='action-verify']");
 
-    public VerificationPage(){
+    public VerificationPage() {
         heading.shouldBe(Condition.visible);
     }
-    public static DashboardPage validVerify(DataHelper.VerificationCode code){
+
+    public static DashboardPage validVerify(DataHelper.VerificationCode code) {
         codeField.setValue(code.getCode());
         verifyButton.click();
         return new DashboardPage();

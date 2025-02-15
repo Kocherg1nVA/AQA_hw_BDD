@@ -21,29 +21,26 @@ public class MoneyTransferPage {
         heading.shouldBe(Condition.visible);
     }
 
-    public DashboardPage moneyTransfer(String amount){
+    public DashboardPage moneyTransfer(String amount) {
         amountField.setValue(amount);
         cardFromField.setValue(selectCardFrom());
         addButton.click();
         return new DashboardPage();
     }
 
-    public String selectCardFrom(){
-        String[] cards = new String[] {getFirstCard().getNumber(), getSecondCard().getNumber()};
-        String cardTo = disabledField.getValue().substring(15,19);
+    public String selectCardFrom() {
+        String[] cards = new String[]{getFirstCard().getNumber(), getSecondCard().getNumber()};
+        String cardTo = disabledField.getValue().substring(15, 19);
         String cardFrom = null;
         for (String card : cards) {
-            if (!cardTo.equals(card.substring(15,19))) {
+            if (!cardTo.equals(card.substring(15, 19))) {
                 cardFrom = card;
             }
         }
         return cardFrom;
     }
 
-    public void amountMoreThanBalance(){
+    public void amountMoreThanBalance() {
         errMsg.shouldHave(Condition.exactText("Ошибка! Недостаточно средств на счёте.")).shouldBe(Condition.visible);
     }
-
-
-
 }
