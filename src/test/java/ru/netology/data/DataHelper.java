@@ -44,4 +44,7 @@ public class DataHelper {
         int amount = new Random().nextInt(balance);
         return Integer.toString(amount);
     }
+    public static String generateInvalidAmount(){
+        return Integer.toString(3_000);
+    }
 }

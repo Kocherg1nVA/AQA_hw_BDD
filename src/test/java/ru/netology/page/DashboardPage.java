@@ -41,5 +41,4 @@ public class DashboardPage {
         secondCardAddButton.click();
         return new MoneyTransferPage();
     }
-
 }
