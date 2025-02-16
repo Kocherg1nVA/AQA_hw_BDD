@@ -45,8 +45,7 @@ public class DataHelper {
         return Integer.toString(new Random().nextInt(amount));
     }
 
-    public static String generateInvalidAmount() {
-        int randomAmount = new Random().nextInt(50_000 - 20_000 + 1) + 20_000;
-        return Integer.toString(randomAmount);
+    public static String generateInvalidAmount(int amount) {
+        return Integer.toString(amount);
     }
 }

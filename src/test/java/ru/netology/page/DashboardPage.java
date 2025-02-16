@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 public class DashboardPage {
 
     private static final SelenideElement heading = $("h1.heading");
-    private static ElementsCollection cards = $$(".list__item");
+    private static final ElementsCollection cards = $$(".list__item");
     private static final SelenideElement firstCardAddButton = $("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0'] .button");
     private static final SelenideElement secondCardAddButton = $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d'] .button");
     private static final String balanceStart = "баланс: ";
@@ -21,24 +21,25 @@ public class DashboardPage {
         heading.shouldBe(Condition.visible);
     }
 
-    public static int getCardBalance(String cardNumber) {
+    public int getCardBalance(String cardNumber) {
+//        val maskedCardNumber = cardNumber.substring(15,19);
         val text = cards.find(Condition.text(cardNumber.substring(15, 19))).getText();
         return extractBalance(text);
     }
 
-    private static int extractBalance(String text) {
+    private int extractBalance(String text) {
         val start = text.indexOf(balanceStart);
         val finish = text.indexOf(balanceFinish);
         val value = text.substring(start + balanceStart.length(), finish);
         return Integer.parseInt(value);
     }
 
-    public static MoneyTransferPage addToFirstCard() {
+    public MoneyTransferPage addToFirstCard() {
         firstCardAddButton.click();
         return new MoneyTransferPage();
     }
 
-    public static MoneyTransferPage addToSecondCard() {
+    public MoneyTransferPage addToSecondCard() {
         secondCardAddButton.click();
         return new MoneyTransferPage();
     }
