@@ -22,7 +22,6 @@ public class DashboardPage {
     }
 
     public int getCardBalance(String cardNumber) {
-//        val maskedCardNumber = cardNumber.substring(15,19);
         val text = cards.find(Condition.text(cardNumber.substring(15, 19))).getText();
         return extractBalance(text);
     }
