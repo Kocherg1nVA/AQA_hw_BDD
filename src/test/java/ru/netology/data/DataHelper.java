@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class DataHelper {
 
-    private DataHelper() {
+    public DataHelper() {
     }
 
     @Value
@@ -41,11 +41,11 @@ public class DataHelper {
         return new CardInfo("5559 0000 0000 0002");
     }
 
-    public static String generateAmount(int amount) {
-        return Integer.toString(new Random().nextInt(amount));
+    public static String generateAmount(int balance) {
+        return Integer.toString(new Random().nextInt(balance) + 1);
     }
 
-    public static String generateInvalidAmount(int amount) {
-        return Integer.toString(amount);
+    public static String generateInvalidAmount(int balance) {
+        return Integer.toString(Math.abs(balance) + new Random().nextInt(10_000));
     }
 }

@@ -18,9 +18,9 @@ public class MoneyTransferPage {
         heading.shouldBe(Condition.visible);
     }
 
-    public DashboardPage moneyTransfer(String amount, DataHelper.CardInfo cardNumber) {
+    public DashboardPage moneyTransfer(String amount, DataHelper.CardInfo cardInfo ) {
         amountField.setValue(amount);
-        cardFromField.setValue(String.valueOf(cardNumber));
+        cardFromField.setValue(cardInfo.getNumber());
         addButton.click();
         return new DashboardPage();
     }

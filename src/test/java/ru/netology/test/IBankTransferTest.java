@@ -33,8 +33,8 @@ public class IBankTransferTest {
     }
 
     @Test
-    public void shouldTransferFromFirsToSecond() {
-        String amount = DataHelper.generateAmount(1_000);
+    public void shouldTransferFromSecondToFirst() {
+        String amount = DataHelper.generateAmount(initialSecondCardBalance);
         int expectedFirstCardBalance = initialFirstCardBalance + Integer.parseInt(amount);
         int expectedSecondCardBalance = initialSecondCardBalance - Integer.parseInt(amount);
 
@@ -46,8 +46,8 @@ public class IBankTransferTest {
     }
 
     @Test
-    public void shouldTransferFromSecondToFirst() {
-        String amount = DataHelper.generateAmount(2_000);
+    public void shouldTransferFromFirstToSecond() {
+        String amount = DataHelper.generateAmount(initialFirstCardBalance);
         int expectedSecondCardBalance = initialSecondCardBalance + Integer.parseInt(amount);
         int expectedFirstCardBalance = initialFirstCardBalance - Integer.parseInt(amount);
 
@@ -60,7 +60,7 @@ public class IBankTransferTest {
 
     @Test
     public void shouldNotTransferAmountMoreThanBalance() {
-        String amount = DataHelper.generateInvalidAmount(22_000);
+        String amount = DataHelper.generateInvalidAmount(initialSecondCardBalance);
         moneyTransferPage = dashboardPage.addToFirstCard();
         moneyTransferPage.moneyTransfer(amount, getFirstCard());
         moneyTransferPage.amountMoreThanBalance();
